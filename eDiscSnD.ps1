@@ -24,7 +24,6 @@ function ValidateEmail {
 ValidateEmail
 
 
-EmailValidation
 
 ## Create the initial connection to the Compliance Center. An authentication prompt will pop up for your input.
 ## The most common error in this step is WIN-RM being disabled.
