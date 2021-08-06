@@ -6,7 +6,8 @@
 
 ## Set your username here. The username must have permissions for eDiscovery in the Compliance Center
 
-$username = '<ENTER USERNAME HERE>' ## The username syntax is your complex email address. 
+$username = Write-Host "Please enter your Email Address" && Read-Host  ## The username syntax is your complex email address. 
+
 
 ## Create the initial connection to the Compliance Center. An authentication prompt will pop up for your input.
 ## The most common error in this step is WIN-RM being disabled.
