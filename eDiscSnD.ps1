@@ -6,8 +6,25 @@
 
 ## Set your username here. The username must have permissions for eDiscovery in the Compliance Center
 
-$username = Write-Host "Please enter your Email Address" && Read-Host  ## The username syntax is your complex email address. 
+# Obsolete $Email = Write-Host "Please enter your Email Address" && Read-Host  ## The username syntax is your complex email address. 
 
+# Function for Validating Email
+# Credit https://stackoverflow.com/users/615422/vertigoray
+
+function ValidateEmail {
+   param(
+       [Parameter(Mandatory = $true)]
+       [ValidateScript({ Resolve-DnsName -Name $_.Host -Type 'MX' })]
+       [mailaddress]
+       $Email
+   )
+   Write-Output $From
+}
+
+ValidateEmail
+
+
+EmailValidation
 
 ## Create the initial connection to the Compliance Center. An authentication prompt will pop up for your input.
 ## The most common error in this step is WIN-RM being disabled.
