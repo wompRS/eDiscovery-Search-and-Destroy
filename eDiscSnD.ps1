@@ -43,8 +43,8 @@ New-ComplianceCase
 
 ## Set the Compliance Search Case variables
 
-$case = '<ENTER NAME HERE>' ## This case name must be unique and will be used to create the compliance search.
-$description = '<ENTER DESCRIPTION>' ## This is the description of the case & search for purposes of accounting. 
+#$case = '<ENTER NAME HERE>' ## This case name must be unique and will be used to create the compliance search.
+#$description = '<ENTER DESCRIPTION>' ## This is the description of the case & search for purposes of accounting. 
 
 function CaseName { # Names the function
    param(
