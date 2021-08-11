@@ -68,8 +68,6 @@ function CaseDescription { # Names the function
 CaseDescription
 
 ## Create the new Compliance Case using the variables set. You will be prompted to continue.
-Write-Output $CaseName
-Write-Output $CaseDescription
 
 New-ComplianceCase -Name $case -CaseType Ediscovery -Confirm
 
