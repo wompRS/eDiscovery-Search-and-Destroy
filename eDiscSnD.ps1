@@ -48,10 +48,10 @@ New-ComplianceCase
 
 function CaseName { # Names the function
    param(
-       [Parameter(Mandatory = $true)] # Sets the prompt to require input# Asks for the input of an email address
-       $CaseName
+       [Parameter(Mandatory = $true)] # Sets the prompt to require input 
+       $CaseName # Sets the prompt to write out "CaseName"
    )
-   Write-Output $CaseName # Sets the $Email variable based on the accepted and validated entry above
+   Write-Output $CaseName # Sets the $CaseName variable based on the accepted and validated entry above
 }
 
 CaseName
@@ -59,10 +59,10 @@ CaseName
 
 function CaseDescription { # Names the function
    param(
-       [Parameter(Mandatory = $true)] # Sets the prompt to require input# Asks for the input of an email address
-       $CaseDescription
+       [Parameter(Mandatory = $true)] # Sets the prompt to require input
+       $CaseDescription # Sets the prompt to write out "CaseDescription"
    )
-   Write-Output $CaseDescription # Sets the $Email variable based on the accepted and validated entry above
+   Write-Output $CaseDescription # Sets the $CaseDescription variable based on the accepted and validated entry above
 }
 
 CaseDescription
