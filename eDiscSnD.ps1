@@ -4,9 +4,6 @@
 ## August 4, 2021
 
 
-## Set your username here. The username must have permissions for eDiscovery in the Compliance Center
-
-
 Set-ExecutionPolicy RemoteSigned -Scope Process # Enables execution of scripts in this Powershell session
 cmd /c "winrm get winrm/config/client/auth" # Checks to see if WinRM is enabled // No error checking as of now
 cmd /c "winrm set winrm/config/client/auth @{Basic="true"}" # Turns on WinRM
