@@ -7,31 +7,28 @@
 ## Set your username here. The username must have permissions for eDiscovery in the Compliance Center
 
 
-Set-ExecutionPolicy RemoteSigned -Scope Process
-cmd /c "winrm get winrm/config/client/auth"
-cmd /c "winrm set winrm/config/client/auth @{Basic="true"}"
-Install-Module -Name ExchangeOnlineManagement -Scope CurrentUser -Confirm:$false
-Import-Module ExchangeOnlineManagement
+Set-ExecutionPolicy RemoteSigned -Scope Process # Enables execution of scripts in this Powershell session
+cmd /c "winrm get winrm/config/client/auth" # Checks to see if WinRM is enabled // No error checking as of now
+cmd /c "winrm set winrm/config/client/auth @{Basic="true"}" # Turns on WinRM
+Install-Module -Name ExchangeOnlineManagement -Scope CurrentUser -Confirm:$false # Installs the Exchange Online module for compliance connections. Automatically accepts prompts.
+Import-Module ExchangeOnlineManagement # Imports the Exchange Online module into the Powershell session for the rest of the script.
 
 # Function for Validating Email
 # Credit https://stackoverflow.com/users/615422/vertigoray
 
-function ValidateEmail {
+function ValidateEmail { # Names the function
    param(
-       [Parameter(Mandatory = $true)]
-       [ValidateScript({ Resolve-DnsName -Name $_.Host -Type 'MX' })]
-       [mailaddress]
+       [Parameter(Mandatory = $true)] # Sets the prompt to require input
+       [ValidateScript({ Resolve-DnsName -Name $_.Host -Type 'MX' })] # Validates the email address sytax
+       [mailaddress] # Asks for the input of an email address
        $Email
    )
-   Write-Output $Email
+   Write-Output $Email # Sets the $Email variable based on the accepted and validated entry above
 }
 
-ValidateEmail
-
-
+ValidateEmail # Runs the ValidateEmail function which prompts for input from the user and then continues the script if the address meets standard email syntax. If not, it asks again until it fits this syntax.
 
 ## Create the initial connection to the Compliance Center. An authentication prompt will pop up for your input.
-## The most common error in this step is WIN-RM being disabled.
 
 Connect-IPPSSession -UserPrincipalName "$Email"
  
@@ -49,7 +46,30 @@ New-ComplianceCase
 $case = '<ENTER NAME HERE>' ## This case name must be unique and will be used to create the compliance search.
 $description = '<ENTER DESCRIPTION>' ## This is the description of the case & search for purposes of accounting. 
 
+function CaseName { # Names the function
+   param(
+       [Parameter(Mandatory = $true)] # Sets the prompt to require input# Asks for the input of an email address
+       $CaseName
+   )
+   Write-Output $CaseName # Sets the $Email variable based on the accepted and validated entry above
+}
+
+CaseName
+
+
+function CaseDescription { # Names the function
+   param(
+       [Parameter(Mandatory = $true)] # Sets the prompt to require input# Asks for the input of an email address
+       $CaseDescription
+   )
+   Write-Output $CaseDescription # Sets the $Email variable based on the accepted and validated entry above
+}
+
+CaseDescription
+
 ## Create the new Compliance Case using the variables set. You will be prompted to continue.
+Write-Output $CaseName
+Write-Output $CaseDescription
 
 New-ComplianceCase -Name $case -CaseType Ediscovery -Confirm
 
