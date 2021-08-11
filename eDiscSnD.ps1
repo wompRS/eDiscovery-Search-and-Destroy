@@ -6,7 +6,12 @@
 
 ## Set your username here. The username must have permissions for eDiscovery in the Compliance Center
 
-# Obsolete $Email = Write-Host "Please enter your Email Address" && Read-Host  ## The username syntax is your complex email address. 
+
+Set-ExecutionPolicy RemoteSigned -Scope Process
+cmd /c "winrm get winrm/config/client/auth"
+cmd /c "winrm set winrm/config/client/auth @{Basic="true"}"
+Install-Module -Name ExchangeOnlineManagement -Scope CurrentUser -Confirm:$false
+Import-Module ExchangeOnlineManagement
 
 # Function for Validating Email
 # Credit https://stackoverflow.com/users/615422/vertigoray
@@ -18,7 +23,7 @@ function ValidateEmail {
        [mailaddress]
        $Email
    )
-   Write-Output $From
+   Write-Output $Email
 }
 
 ValidateEmail
@@ -28,7 +33,7 @@ ValidateEmail
 ## Create the initial connection to the Compliance Center. An authentication prompt will pop up for your input.
 ## The most common error in this step is WIN-RM being disabled.
 
-Connect-IPPSSession -UserPrincipalName $username
+Connect-IPPSSession -UserPrincipalName "$Email"
  
 <#
 New-ComplianceCase
