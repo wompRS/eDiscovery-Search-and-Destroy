@@ -49,8 +49,8 @@ function SetCaseName { # Names the function
        [Parameter(Mandatory = $true)] # Sets the prompt to require input 
        $CaseName # Sets the prompt to write out "CaseName"
    )
-   Write-Output $CaseName # Sets the $CaseName variable based on the accepted and validated entry above
-
+   Write-Output $CaseName
+ # Sets the $CaseName variable based on the accepted and validated entry above
 }
 #
 
