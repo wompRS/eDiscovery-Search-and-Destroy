@@ -43,16 +43,24 @@ New-ComplianceCase
 #$case = '<ENTER NAME HERE>' ## This case name must be unique and will be used to create the compliance search.
 #$description = '<ENTER DESCRIPTION>' ## This is the description of the case & search for purposes of accounting. 
 
-function CaseName { # Names the function
+#
+function SetCaseName { # Names the function
    param(
        [Parameter(Mandatory = $true)] # Sets the prompt to require input 
        $CaseName # Sets the prompt to write out "CaseName"
    )
    Write-Output $CaseName # Sets the $CaseName variable based on the accepted and validated entry above
+
 }
+#
 
-CaseName
+SetCaseName
 
+Write-Host "Case name is $CaseName"
+
+
+# Calls Casename function to set the name of the case to be used and accounted for in the future
+New-ComplianceCase -Name $CaseName -CaseType Ediscovery 
 
 function CaseDescription { # Names the function
    param(
@@ -62,11 +70,11 @@ function CaseDescription { # Names the function
    Write-Output $CaseDescription # Sets the $CaseDescription variable based on the accepted and validated entry above
 }
 
-CaseDescription
+CaseDescription # Calls CaseDescription function to set the description of the case to be used and accounted for in the future
 
 ## Create the new Compliance Case using the variables set. You will be prompted to continue.
 
-New-ComplianceCase -Name $case -CaseType Ediscovery -Confirm
+
 
 
 <# Set the search requirements for the email as required. For more info see: https://docs.microsoft.com/en-us/powershell/module/exchange/new-compliancesearch?view=exchange-ps
