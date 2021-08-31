@@ -87,19 +87,32 @@ function Mailbox {
    )
    Write-Output $mailbox #Writes the output to verify it was input. 
 }
+#Create a Case Name for the Compliance search function. 
+function SetComplianceCaseName {
+   # Names the function
+   param(
+      [Parameter(Mandatory = $true)] # Sets the prompt to require input 
+      [string]$ComplianceCaseName # Sets the prompt to write out "CaseName"
+   )
+   Write-Output $ComplianceCaseName #Writes the output to verify it was input. 
+}
+#
+
+$Case = SetCase #Sets the $CaseName variable based on the accepted and validated entry above
+
 
 ## Create your search variables
-$subject = "Subject:$(subject)" ## COMMENT OUT if not needed. Used if searching for the subject line.
-$content = "$(content)" ## COMMENT OUT if not needed. Used to search for keywords in the email content.
+$subject = "Subject: '$(subject)'" ## COMMENT OUT if not needed. Used if searching for the subject line.
+$content = "'$(content)'" ## COMMENT OUT if not needed. Used to search for keywords in the email content.
 $mailbox = "$(mailbox)" ## Set to 'all' or a specific user's mailbox.
 $query = "$subject" + ' AND ' + "$content"
 Write-Host $query
 
 
-New-ComplianceSearch -Name $case -ExchangeLocation all -ContentMatchQuery $query -Confirm -Description $description
+New-ComplianceSearch -Name $ComplianceCaseName -ExchangeLocation all -ContentMatchQuery $query -Confirm -Description $description
 
 Start-ComplianceSearch -Identity $name -Confirm | Format-List
 
-Get-ComplianceSearch -Case $case -Identity $name -ResultSize unlimited | Format-List
+Get-ComplianceSearch -Case $ComplianceCaseName -Identity $name -ResultSize unlimited | Format-List
 
 New-ComplianceSearchAction -SearchName "$name" -Purge -PurgeType SoftDelete -Confirm
