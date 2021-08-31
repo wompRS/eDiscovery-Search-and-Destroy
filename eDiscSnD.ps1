@@ -89,7 +89,7 @@ function Mailbox {
 }
 
 ## Create your search variables
-$subject = "Subject:'$(subject)'" ## COMMENT OUT if not needed. Used if searching for the subject line.
+$subject = "Subject:$(subject)" ## COMMENT OUT if not needed. Used if searching for the subject line.
 $content = "$(content)" ## COMMENT OUT if not needed. Used to search for keywords in the email content.
 $mailbox = "$(mailbox)" ## Set to 'all' or a specific user's mailbox.
 $query = "$subject" + ' AND ' + "$content"
