@@ -13,12 +13,13 @@ Import-Module ExchangeOnlineManagement # Imports the Exchange Online module into
 # Function for Validating Email
 # Credit https://stackoverflow.com/users/615422/vertigoray
 
-function ValidateEmail { # Names the function
+function ValidateEmail {
+   # Names the function
    param(
-       [Parameter(Mandatory = $true)] # Sets the prompt to require input
-       [ValidateScript({ Resolve-DnsName -Name $_.Host -Type 'MX' })] # Validates the email address sytax
-       [mailaddress] # Asks for the input of an email address
-       $Email
+      [Parameter(Mandatory = $true)] # Sets the prompt to require input
+      [ValidateScript( { Resolve-DnsName -Name $_.Host -Type 'MX' })] # Validates the email address sytax
+      [mailaddress] # Asks for the input of an email address
+      $Email
    )
    Write-Output $Email # Sets the $Email variable based on the accepted and validated entry above
 }
@@ -44,28 +45,26 @@ New-ComplianceCase
 #$description = '<ENTER DESCRIPTION>' ## This is the description of the case & search for purposes of accounting. 
 
 #
-function SetCaseName { # Names the function
+function SetCaseName {
+   # Names the function
    param(
-       [Parameter(Mandatory = $true)] # Sets the prompt to require input 
-       $CaseName # Sets the prompt to write out "CaseName"
+      [Parameter(Mandatory = $true)] # Sets the prompt to require input 
+      [string]$CaseName # Sets the prompt to write out "CaseName"
    )
-   Write-Output $CaseName
- # Sets the $CaseName variable based on the accepted and validated entry above
+   Write-Output $CaseName #Writes the output to verify it was input. 
 }
 #
 
-SetCaseName
+$CaseName = SetCaseName #Sets the $CaseName variable based on the accepted and validated entry above
 
-Write-Host "Case name is $CaseName"
+New-ComplianceCase -Name $CaseName -CaseType Ediscovery # Calls Casename function to set the name of the case to be used and accounted for in the future
 
 
-# Calls Casename function to set the name of the case to be used and accounted for in the future
-New-ComplianceCase -Name $CaseName -CaseType Ediscovery 
-
-function CaseDescription { # Names the function
+function CaseDescription {
+   # Names the function
    param(
-       [Parameter(Mandatory = $true)] # Sets the prompt to require input
-       $CaseDescription # Sets the prompt to write out "CaseDescription"
+      [Parameter(Mandatory = $true)] # Sets the prompt to require input
+      $CaseDescription # Sets the prompt to write out "CaseDescription"
    )
    Write-Output $CaseDescription # Sets the $CaseDescription variable based on the accepted and validated entry above
 }
@@ -101,11 +100,12 @@ $query = "$subject + ' AND ' + $content"
 Write-Host $query
 
 try {
-Get-Variable subject -Scope Global -ErrorAction 'Stop'
-} catch [System.Management.Automation.ItemNotFoundException]{
+   Get-Variable subject -Scope Global -ErrorAction 'Stop'
+}
+catch [System.Management.Automation.ItemNotFoundException] {
    Write-Warning $_;
    New-Variable -Name 
-   }
+}
 
 
 New-ComplianceSearch -Name $case -ExchangeLocation all -ContentMatchQuery $query -Confirm -Description $description
