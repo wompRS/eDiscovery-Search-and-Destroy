@@ -95,14 +95,6 @@ $mailbox = "$(mailbox)" ## Set to 'all' or a specific user's mailbox.
 $query = "$subject" + ' AND ' + "$content"
 Write-Host $query
 
-try {
-   Get-Variable subject -Scope Global -ErrorAction 'Stop'
-}
-catch [System.Management.Automation.ItemNotFoundException] {
-   Write-Warning $_;
-   New-Variable -Name 
-}
-
 
 New-ComplianceSearch -Name $case -ExchangeLocation all -ContentMatchQuery $query -Confirm -Description $description
 
