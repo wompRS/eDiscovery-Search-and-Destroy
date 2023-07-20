@@ -7,8 +7,4 @@ Search and Destroy emails in your 0365 Enterprise tenant.
 
 #### It is important to note that while you may be utilizing this tool for good, it is extremely easy for someone to do real damage with this tool. As such, only use this tool
 #### if you are qualified to do so and know what you are doing. Make sure that only people needing to perform Compliance and Security tasks in your organization have access 
-<<<<<<< HEAD
 #### both to the tool, and to the Compliance Center roles. 
-=======
-#### both to the tool, and to the Compliance Center roles. 
->>>>>>> 475d5a35ed2d78d86c070c52f447e1439bf48768
