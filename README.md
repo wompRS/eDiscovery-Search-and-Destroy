@@ -1,4 +1,4 @@
-### This project has been mothballed/abandoned after Microsoft implemented a much faster way of searching for and destroying emails. It is likely that things no longer work properly. 
+## This project has been mothballed/abandoned after Microsoft implemented a much faster way of searching for and destroying emails. It is likely that things no longer work properly. 
 
 # eDiscovery-Search-and-Destroy
 Search and Destroy emails in your 0365 Enterprise tenant. 
